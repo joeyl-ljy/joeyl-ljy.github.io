@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }}</title>
+  <meta name="author" content="{{ site.author.name }}">
+  <link href='{{ ASSET_PATH }}/css/style.css' rel="stylesheet" media="all">
+  <link href='{{ ASSET_PATH }}/css/index.css' rel="stylesheet" media="all">
+  <script type="text/javascript" src="{{ ASSET_PATH }}/jquery.min.js"></script>
+  <script src="{{ ASSET_PATH }}/TweenMax.min.js"></script>
+</head>
+<body>
+<div class="sea_layout">
+  <div class="sea_left">
+    <div class="sea">
+      <div class="wrap">
+        <div class="cluster two"></div>
+      </div>
+      <div class="wrap">
+        <div class="shark">
+          <div class="front"></div>
+          <div class="tail"></div>
+          <div class="info">
+            <p><a href="/categories.html" rel="me"><h1 class="bob"><span style="color: #f79521;">B</span><span style="color: #f2592c;">L</span><span>O</span><span style="color: #FFF;">G</span></h1></a></p>
+          </div>
+        </div>
+      </div>
+      <h1 class="bob"><span>S</span><span>E</span><span>A</span><br><span>D</span><span>E</span><span>B</span><span>R</span><span>I</span><span>S</span></h1>
+      <div class="intro">
+        <div><p>书山有路勤为径，学海无涯苦作舟。<br/>There is no royal road to learning.</p>
+        <a href="/categories.html" rel="me"><span>BLOG</span></a>·<a href="http://github.com/{{ site.author.github }}/" rel="me">joeyl</a>·<a href="http://github.com/{{ site.author.github }}/" rel="me"><span>GITHUB</span></a></div>
+      </div>
+      <script type="text/javascript">
+        var $two = $('.two'),
+            $shark = $('.shark'),
+            $x_axis  = $('#x-axis'),
+            $y_axis  = $('#y-axis'),
+            $container = $('body'),
+            container_w = $container.width(),
+            container_h = $container.height();
+
+        $(window).on('mousemove.parallax', function(event) {
+          var pos_x = event.pageX,
+              pos_y = event.pageY,
+              left  = 0,
+              top   = 0,
+              bri  = 0;
+
+          bri  = container_h / 0.25 - pos_y;
+          left = container_w / 2 - pos_x;
+          top  = container_h / 2 - pos_y;
+          
+          
+          TweenMax.to(
+            $x_axis, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateX(' + (left * -1) + 'px)'
+              }, 
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+          
+          TweenMax.to(
+            $y_axis, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateY(' + (top * -1) + 'px)' 
+              }, 
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+
+          TweenMax.to(
+            $two, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateX(' + (left * 0.06) + 'px) translateY(' + (top * 0.04) + 'px)',
+                
+              }, 
+              
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+
+          TweenMax.to(
+            $shark, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateX(' + (left * -0.07) + 'px) translateY(' + (top * 0.04) + 'px) rotate(' + (top * 0.02) + 'deg)',
+                
+              }, 
+              
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+          
+          });
+      </script>
+    </div>
+  </div>
+  <div class="sea_right" id="page">
+    <header class="the-header">
+      <div class="unit-head">
+        <div class="unit-inner unit-head-inner">
+          <nav class="nav-global">
+            <ul>
+              <li class="logo"><a href="/">{{ site.title }}</a></li>
+              {% for category in site.categories %}
+                <li class="{{ category[0] }}"><a href="/{{ category[0] }}.html"> {{ category[0] }}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div><!-- unit-inner -->
+      </div><!-- unit-head -->
+    </header>
+  {{ content }}
+  </div>
+</div>
+</body>
+</html>
