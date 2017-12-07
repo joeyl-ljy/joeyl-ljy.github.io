@@ -260,3 +260,7 @@
 .sea .cluster.two {
   background-image: url("/assets/themes/the-program/skin/svg/69241f8fbe.svg");
 }
+
+.sea_right{ 
+  display: none;
+}

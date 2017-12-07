@@ -965,8 +965,8 @@ pre {
     height: 26px;
   }
   .the-header .unit-head .nav-global li a:hover {
-    background-color: #474747;
-    color: #fff;
+    background-color: #fff;
+    color: #273276;
   }
   .the-header .unit-head .nav-global li:nth-child(2) {
     border-width: 0 1px;

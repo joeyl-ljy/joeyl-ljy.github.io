@@ -1,24 +1,132 @@
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Categories</title>
-	<meta name="author" content="joeyl">
-	<link href='/css/style.css' rel="stylesheet" media="all">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Categories</title>
+  <meta name="author" content="joeyl">
+  <link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+  <link href='/assets/themes/the-program/css/index.css' rel="stylesheet" media="all">
+  <script type="text/javascript" src="/assets/themes/the-program/jquery.min.js"></script>
+  <script src="/assets/themes/the-program/TweenMax.min.js"></script>
 </head>
 <body>
+<div class="sea_layout">
+  <div class="sea_left">
+    <div class="sea">
+      <div class="wrap">
+        <div class="cluster two"></div>
+      </div>
+      <div class="wrap">
+        <div class="shark">
+          <div class="front"></div>
+          <div class="tail"></div>
+          <div class="info">
+            <p><a href="/categories.html" rel="me"><h1 class="bob"><span style="color: #f79521;">B</span><span style="color: #f2592c;">L</span><span>O</span><span style="color: #FFF;">G</span></h1></a></p>
+          </div>
+        </div>
+      </div>
+      <h1 class="bob"><span>S</span><span>E</span><span>A</span><br><span>D</span><span>E</span><span>B</span><span>R</span><span>I</span><span>S</span></h1>
+      <div class="intro">
+        <div><p>书山有路勤为径，学海无涯苦作舟。<br/>There is no royal road to learning.</p>
+        <a href="/categories.html" rel="me"><span>BLOG</span></a>·<a href="http://github.com/joeyl-ljy/" rel="me">joeyl</a>·<a href="http://github.com/joeyl-ljy/" rel="me"><span>GITHUB</span></a></div>
+      </div>
+      <script type="text/javascript">
+        var $two = $('.two'),
+            $shark = $('.shark'),
+            $x_axis  = $('#x-axis'),
+            $y_axis  = $('#y-axis'),
+            $container = $('body'),
+            container_w = $container.width(),
+            container_h = $container.height();
 
-<div id="page" class="hentry">
-	<div class="body" role="main">
-		<div class="unit-body">
-			<div class="unit-inner unit-body-inner">
-				<div class="entry-content">
-					
+        $(window).on('mousemove.parallax', function(event) {
+          var pos_x = event.pageX,
+              pos_y = event.pageY,
+              left  = 0,
+              top   = 0,
+              bri  = 0;
+
+          bri  = container_h / 0.25 - pos_y;
+          left = container_w / 2 - pos_x;
+          top  = container_h / 2 - pos_y;
+          
+          
+          TweenMax.to(
+            $x_axis, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateX(' + (left * -1) + 'px)'
+              }, 
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+          
+          TweenMax.to(
+            $y_axis, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateY(' + (top * -1) + 'px)' 
+              }, 
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+
+          TweenMax.to(
+            $two, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateX(' + (left * 0.06) + 'px) translateY(' + (top * 0.04) + 'px)',
+                
+              }, 
+              
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+
+          TweenMax.to(
+            $shark, 
+            1, 
+            { 
+              css: { 
+                transform: 'translateX(' + (left * -0.07) + 'px) translateY(' + (top * 0.04) + 'px) rotate(' + (top * 0.02) + 'deg)',
+                
+              }, 
+              
+              ease:Expo.easeOut, 
+              overwrite: 'all' 
+            });
+          
+          });
+      </script>
+    </div>
+  </div>
+  <div class="sea_right" id="page">
+    <header class="the-header">
+      <div class="unit-head">
+        <div class="unit-inner unit-head-inner">
+          <nav class="nav-global">
+            <ul>
+              <li class="logo"><a href="/">joeyl博客</a></li>
+              
+                <li class="git"><a href="/git.html"> git</a></li>
+              
+                <li class="ruby"><a href="/ruby.html"> ruby</a></li>
+              
+            </ul>
+          </nav>
+        </div><!-- unit-inner -->
+      </div><!-- unit-head -->
+    </header>
+  
 
 
 <style type="text/css">
@@ -28,34 +136,13 @@
 	  float: left;
 	}
 
-	.sea_right{ 
-	  display: none;
-	}
-
 	.sea_layout .sea_right{ 
 	  display: block;
 	}
 </style>
 
 
-				</div>
-			</div><!-- unit-inner -->
-		</div><!-- unit-body -->
-	</div><!-- body -->
-	<footer class="the-footer">
-		<div class="unit-foot">
-			<div class="unit-inner unit-foot-inner">
-				<div class="misc vcard">
-					<h4>关于joeyl</h4>
-					<ul>
-						<li class="contact"><address><span class="author fn n">joeyl</span></address></li>
-						<li class="github"><a href="http://github.com/joeyl-ljy/" rel="me">github.com/joeyl-ljy</a></li>
-					</ul>
-				</div>
-			</div><!-- unit-foot-inner -->
-		</div><!-- unit-foot -->
-	</footer>
-</div><!-- page -->
-
+  </div>
+</div>
 </body>
 </html>
