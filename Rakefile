@@ -56,7 +56,11 @@ task :post do
     puts "Error - date format must be YYYY-MM-DD, please check you typed it correctly!"
     exit -1
   end
-  filename = File.join("#{CONFIG['posts']}#{ENV['post_path']}", "#{date}-#{slug}.#{CONFIG['post_ext']}")
+  dirname = category.empty? ? "#{CONFIG['posts']}#{ENV['post_path']}" : File.join("#{CONFIG['posts']}#{ENV['post_path']}",category.strip.gsub(/[^\w-]/, ''))
+  unless Dir.exists?(dirname)
+    mkdir dirname
+  end
+  filename = File.join(dirname, "#{date}-#{slug}.#{CONFIG['post_ext']}")
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
