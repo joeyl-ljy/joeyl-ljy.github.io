@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>重复上一步</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="129" y="106" width="350" height="986" rx="2"></rect>
+        <filter x="-2.0%" y="-0.5%" width="104.0%" height="101.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-6-Copy" transform="translate(-159.000000, -995.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g id="重复上一步" mask="url(#mask-2)">
+                <g transform="translate(159.000000, 995.000000)" id="Group-7">
+                    <g transform="translate(6.000000, 7.000000)">
+                        <path d="M8.34455351,4.70337252 L12.357275,4.70337252 L11.4334817,1.06289697 L10.5188128,2.14088577 L10.1397779,1.83993816 C9.19100859,1.08663046 7.73626646,0.586783345 5.6589672,0.586783345 C4.07261165,0.586783345 2.78583961,1.25737163 1.75849823,2.39550184 C2.81035139,1.83154999 3.89030382,1.50048828 4.96483753,1.50048828 C6.7826304,1.50048828 8.19023359,2.33674965 8.90716256,3.50945798 L9.0957882,3.81800021 L8.34455351,4.70337252 Z" id="Combined-Shape" stroke="#555555"></path>
+                        <path d="M7.26457222,11.2033725 L13,11.2033725 L11.679612,6 L10.4506869,7.44835726 C9.72908869,6.8754198 8.26289173,6.08678334 5.6589672,6.08678334 C1.56959683,6.08678334 0,10.2403767 0,10.2403767 C0,10.2403767 2.34531848,8.00793457 4.96483753,8.00793457 C6.87194813,8.00793457 8.00521289,8.99270215 8.48056598,9.77025552 L7.26457222,11.2033725 Z" id="Combined-Shape" fill="#555555"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

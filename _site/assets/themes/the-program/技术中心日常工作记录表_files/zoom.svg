@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>缩放</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="129" y="106" width="350" height="986" rx="2"></rect>
+        <filter x="-2.0%" y="-0.5%" width="104.0%" height="101.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-6-Copy" transform="translate(-159.000000, -959.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g id="缩放" mask="url(#mask-2)">
+                <g transform="translate(159.000000, 959.000000)">
+                    <g id="外边框-copy-2"></g>
+                    <g id="Group-6" transform="translate(7.000000, 7.000000)">
+                        <g id="Group-3" transform="translate(6.000000, 6.000000)" fill="#555555">
+                            <path d="M3.56694174,2.68305826 L0.883883476,-7.1942452e-14 L-1.54321e-14,0.883883476 L2.68305826,3.56694174 L1.25,5 L5,5 L5,1.25 L3.56694174,2.68305826 Z" id="Combined-Shape"></path>
+                        </g>
+                        <g id="Group-3" transform="translate(2.500000, 2.500000) scale(-1, -1) translate(-2.500000, -2.500000) " fill="#555555">
+                            <path d="M3.56694174,2.68305826 L0.883883476,-7.1942452e-14 L-1.54321e-14,0.883883476 L2.68305826,3.56694174 L1.25,5 L5,5 L5,1.25 L3.56694174,2.68305826 Z" id="Combined-Shape"></path>
+                        </g>
+                        <rect id="Rectangle-7" fill="#555555" x="5" y="0" width="6" height="1"></rect>
+                        <rect id="Rectangle-7-Copy" fill="#555555" x="0" y="10" width="6" height="1"></rect>
+                        <rect id="Rectangle-8" fill="#555555" x="10" y="0" width="1" height="6"></rect>
+                        <rect id="Rectangle-8-Copy" fill="#555555" x="0" y="5" width="1" height="6"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

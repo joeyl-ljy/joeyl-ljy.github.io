@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>合并单元格 copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="129" y="106" width="350" height="986" rx="2"></rect>
+        <filter x="-2.0%" y="-0.5%" width="104.0%" height="101.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-6-Copy" transform="translate(-159.000000, -762.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g id="合并单元格-copy" mask="url(#mask-2)" fill="#555555">
+                <g transform="translate(159.000000, 762.000000)" id="Combined-Shape">
+                    <path d="M15,12 L17,12 L17,13 L15,13 L15,14.8649652 L13,12.5355339 L15,10.2061026 L15,12 Z M14,17 L18,17 L18,8 L14,8 L14,10 L13,10 L13,7 L13.5,7 L18.5,7 L19,7 L19,18 L18.5,18 L13,18 L13,17.25 L13,15 L14,15 L14,17 Z M10,13 L8,13 L8,12 L10,12 L10,10.1233288 L12.0710678,12.5355339 L10,14.947739 L10,13 Z M12,17.25 L12,18 L6,18 L6,17.5 L6,7.5 L6,7 L12,7 L12,7.5 L12,10 L11,10 L11,8 L7,8 L7,17 L11,17 L11,15 L12,15 L12,17.25 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

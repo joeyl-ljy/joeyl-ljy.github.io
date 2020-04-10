@@ -36,8 +36,3 @@ tag: [ruby rails]
 	* Environment: development
 	* Listening on tcp://0.0.0.0:3000
 	Use Ctrl-C to stop
-
-
-
-
-

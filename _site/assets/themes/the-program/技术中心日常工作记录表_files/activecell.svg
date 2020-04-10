@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>激活单元格</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="129" y="106" width="350" height="986" rx="2"></rect>
+        <filter x="-2.0%" y="-0.5%" width="104.0%" height="101.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-6-Copy" transform="translate(-159.000000, -726.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g id="激活单元格" mask="url(#mask-2)">
+                <g transform="translate(159.000000, 726.000000)">
+                    <path d="M17,12 L17,8 L7,8 L7,17 L12,17 L12,18 L18,18 L18,12 L17,12 Z M6,7 L18,7 L18,18 L6,18 L6,7 Z" id="Combined-Shape" fill="#555555"></path>
+                    <g id="Group-9" stroke-width="1" fill="none" transform="translate(8.000000, 9.000000)">
+                        <rect id="Rectangle-10" fill="#555555" x="3.5" y="0" width="1" height="2"></rect>
+                        <rect id="Rectangle-10-Copy" fill="#555555" x="3.5" y="5" width="1" height="2"></rect>
+                        <rect id="Rectangle-10" fill="#555555" transform="translate(6.165064, 2.250000) rotate(60.000000) translate(-6.165064, -2.250000) " x="5.66506351" y="1.25" width="1" height="2"></rect>
+                        <rect id="Rectangle-10-Copy" fill="#555555" transform="translate(1.834936, 4.750000) rotate(60.000000) translate(-1.834936, -4.750000) " x="1.33493649" y="3.75" width="1" height="2"></rect>
+                        <rect id="Rectangle-10-Copy" fill="#555555" transform="translate(1.834936, 2.250000) rotate(120.000000) translate(-1.834936, -2.250000) " x="1.33493649" y="1.25" width="1" height="2"></rect>
+                    </g>
+                    <g id="Group-8" stroke-width="1" fill="none" transform="translate(14.000000, 13.500000)">
+                        <polygon id="Combined-Shape" fill="#555555" transform="translate(2.500000, 2.500000) rotate(180.000000) translate(-2.500000, -2.500000) " points="0 1.36924388 5 1.77635684e-15 3.63075612 5 2.50560716 2.50560716"></polygon>
+                        <rect id="Rectangle-4" fill="#555555" transform="translate(3.121320, 3.121320) rotate(-45.000000) translate(-3.121320, -3.121320) " x="2.62132034" y="0.621320344" width="1" height="5"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
