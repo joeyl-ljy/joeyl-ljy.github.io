@@ -84,10 +84,10 @@ end # task :post
 # If you don't specify a file extention we create an index.html at the path specified
 desc "Create a new page."
 task :page do
-  name = ENV["name"] || "new-page.md"
-  filename = File.join(SOURCE, "#{name}")
+  name = ENV["name"] || "new-page"
+  filename = File.join(SOURCE, "#{name}".concat('.html'))
   filename = File.join(filename, "index.html") if File.extname(filename) == ""
-  title = File.basename(filename, File.extname(filename)).gsub(/[\W\_]/, " ").gsub(/\b\w/){$&.upcase}
+  title =  ENV["title"] || File.basename(filename, File.extname(filename)).gsub(/[\W\_]/, " ").gsub(/\b\w/){$&.upcase}
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
@@ -99,8 +99,12 @@ task :page do
     post.puts "layout: page"
     post.puts "title: \"#{title}\""
     post.puts 'description: ""'
+    post.puts 'header : Post Archive'
+    post.puts 'group: navigation'
     post.puts "---"
     post.puts "{% include JB/setup %}"
+    post.puts "{% assign posts_collate = site.categories.#{name} %}"
+    post.puts "{% include JB/posts_collate %}"
   end
 end # task :page
 

@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>init project</title>
+	<meta name="author" content="joeyl">
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+</head>
+<body>
+
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo"><a href="/">joeyl博客</a></li>
+						<!-- <li class="page"><a href="/pages.html">pages</a></li> -->
+						
+    					<li class="git"><a href="/git.html"> git</a></li>
+						
+    					<li class="ruby"><a href="/ruby.html"> ruby</a></li>
+						
+    					<li class="js"><a href="/js.html"> js</a></li>
+						
+    					<li class="react"><a href="/react.html"> react</a></li>
+						
+    					<li class="env"><a href="/env.html"> env</a></li>
+						
+    					<li class="jekyll"><a href="/jekyll.html"> jekyll</a></li>
+						
+					</ul>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">init project</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					<ol>
+  <li>项目初始化
+  a.新建项目
+     rails new new_app_new</li>
+</ol>
+
+<p>b.初始化master.key和Gemfile等项目隐私配置，设置数据库和基本gem并推送到gitlab
+		生成master.key，作为开发的私钥	
+		EDITOR=”mate –wait” bin/rails credentials:edit
+		编辑
+		EDITOR=”subl –wait” bin/rails credentials:edit
+		并在/.gitignore文件增加一行,不做git管理
+		/config/master.key
+	c.由gitlab管理者项目master在gitlab上确认发布
+		git push origin new_app_new</p>
+
+<p>2.增加一些初始化gem，如Capistrano,apipie,rspec,rubocop,httparty等以及其配置
+  a.增加Capistrano其配置文件
+		# 依赖组建，Cap 项目大量使用组件形式，这样可以让不同需求的人不会引入太多无用功能，根据文档进行组件选取和配置就行
+		/Capfile</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	# 所有环境的部署配置（通常需设置gitlab代码源的地址，服务器部署位置，以及一些未存储在gitlab的项目配置文件等）
+	/config/deploy.rb
+
+	# 不同环境的部署配置文件夹（通常有具体环境的服务主机地址）
+	/config/deploy
+	/config/environments
+	如：
+	/config/deploy/staing.rb
+	/config/environments/staing.rb
+	/config/deploy/production.rb
+	/config/environments/production.rb
+
+	#增加环境需增加对应数据库配置
+
+b.增加GitLab CI/CD
+	# 主要服务器权限配置,如DATABASE信息，服务器url
+	/.gitlab-ci.yml
+
+	# 根据具体项目定制的一些配置文件
+	/ci/*
+
+c.增加代码规范的配置文件
+	/.rubocop.yml
+
+d.增加rspec配置
+	/.rspec
+
+e.增加brakman配置
+  /config/brakeman.yml
+
+f.增加active_client相关文件
+	/lib/active_client
+	/lib/active_client.rb
+
+g.增加apipie的扩展配置文档
+	/config/initializers/apipie.rb
+	/app/assets/images
+	/app/views/apipie
+	/app/views/layouts/apipie
+	/vendor
+	/lib/apipie
+
+h.生成线上测试环境配置
+	/Dockerfile
+
+i.修改application.rb增加对应配置
+  # routes
+  # time_zone
+  # i18n
+  # rspec
+  # RackCors配置
+  # apipie依赖库
+</code></pre></div></div>
+
+<p>3.配置推送的项目的gitlab权限
+	#设置分支合并规则（选择Fast-forward merge）
+	Settings -&gt; General -&gt; Merge request settings
+	#本地连接环境服务器的权限，CI/CD配置的各个环节私钥
+	Settings -&gt; CI/CD -&gt; Secret variables
+	#环境服务器连接代码服务器
+	Settings -&gt; Repository -&gt; Deploy Keys</p>
+
+<p>4.推送到服务器
+	cap xxx deploy 本地运行或gitlab上操作
+	scp 文件到服务器</p>
+
+					<div class="meta">
+						<p class="date-publish">
+							Published: 
+							<date class="date-pub" title="2018-03-02T09:27:53+08:00" datetime="2018-03-02T09:27:53+08:00" pubdate>
+							<span class="month"><abbr>March</abbr></span>
+							<span class="day">02</span>
+							<span class="year">2018</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+     
+    	<li><a href="/categories.html#ruby-ref">
+    		ruby <span>26</span>
+    	</a></li>
+    
+  
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+     
+    	<li><a href="/tags.html#ruby rails-ref">ruby rails <span>21</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<!-- <div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'joeyl'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div> -->
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/ruby/2018/02/28/enum" title="View enum">&laquo; enum</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/ruby/2018/06/01/something-should-to-know" title="View something should to know">something should to know &raquo;</a></li>
+							
+						</ul>
+					</nav>
+					<p class="gotop">
+						<a href="#page">Back to Top</a>
+					</p>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>关于joeyl</h4>
+					<ul>
+						<li class="contact"><address><span class="author fn n">&copy; 2020 joeyl</span></address></li>
+						<li class="github"><a href="http://github.com/joeyl-ljy/" rel="me">github.com/joeyl-ljy</a></li>
+					</ul>
+				</div>
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	// load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/ruby/2018/03/02/init-project" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+  
+  
+
+
+
+</body>
+</html>
+

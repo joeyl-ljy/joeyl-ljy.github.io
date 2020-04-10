@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>posts_collate list time error</title>
+	<meta name="author" content="joeyl">
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+</head>
+<body>
+
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo"><a href="/">joeyl博客</a></li>
+						<!-- <li class="page"><a href="/pages.html">pages</a></li> -->
+						
+    					<li class="git"><a href="/git.html"> git</a></li>
+						
+    					<li class="ruby"><a href="/ruby.html"> ruby</a></li>
+						
+    					<li class="js"><a href="/js.html"> js</a></li>
+						
+    					<li class="react"><a href="/react.html"> react</a></li>
+						
+    					<li class="env"><a href="/env.html"> env</a></li>
+						
+    					<li class="jekyll"><a href="/jekyll.html"> jekyll</a></li>
+						
+					</ul>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">posts_collate list time error</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+<h1 id="文章列表下分类排列和时间错乱">文章列表下分类排列和时间错乱</h1>
+<p>查看 _includes/JB/posts_collate 的代码后发现，由两种情况导致：
+1.post.previous存在非当前分类的文章</p>
+
+<p>2.年月的判断有误：如若年份不同，月份相同时，月份未显示</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>修改前：
+{% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+{% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
+{% if forloop.last %}
+  &lt;/ul&gt;
+{% else %}
+  {% if this_year != next_year %}
+    &lt;/ul&gt;
+    &lt;h2&gt;{{next_year}}&lt;/h2&gt;
+    &lt;h3&gt;{{next_month}}&lt;/h3&gt;
+    &lt;ul&gt;
+  {% else %}    
+    {% if this_month != next_month %}
+      &lt;/ul&gt;
+      &lt;h3&gt;{{next_month}}&lt;/h3&gt;
+      &lt;ul&gt;
+    {% endif %}
+  {% endif %}
+{% endif %}
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>修改后：
+
+{% assign loop_index = forloop.index -1 %}
+{% capture next_year %}{{ posts_collate[loop_index].date | date: "%Y" }}{% endcapture %}
+{% capture next_month %}{{ posts_collate[loop_index].date | date: "%B" }}{% endcapture %}
+
+{% if forloop.last %}
+  &lt;/ul&gt;
+{% else %}
+  {% if this_year != next_year %}
+    &lt;/ul&gt;
+    &lt;h2&gt;{{next_year}}年&lt;/h2&gt;
+  {% endif %}
+  {% if this_year != next_year or this_month != next_month %}
+    &lt;/ul&gt;
+    &lt;h3&gt;{{next_month | date: "%m" }}月&lt;/h3&gt;
+    &lt;ul&gt;
+  {% endif %}
+{% endif %}
+</code></pre></div></div>
+
+
+					<div class="meta">
+						<p class="date-publish">
+							Published: 
+							<date class="date-pub" title="2020-06-12T12:34:02+08:00" datetime="2020-06-12T12:34:02+08:00" pubdate>
+							<span class="month"><abbr>June</abbr></span>
+							<span class="day">12</span>
+							<span class="year">2020</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+     
+    	<li><a href="/categories.html#jekyll-ref">
+    		jekyll <span>4</span>
+    	</a></li>
+    
+  
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<!-- <div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'joeyl'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div> -->
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/jekyll/2020/06/12/use-jekyll-build-blog" title="View use jekyll build blog">&laquo; use jekyll build blog</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/jekyll/2020/06/12/raw-for-liquid" title="View raw tags for liquid">raw tags for liquid &raquo;</a></li>
+							
+						</ul>
+					</nav>
+					<p class="gotop">
+						<a href="#page">Back to Top</a>
+					</p>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>关于joeyl</h4>
+					<ul>
+						<li class="contact"><address><span class="author fn n">&copy; 2020 joeyl</span></address></li>
+						<li class="github"><a href="http://github.com/joeyl-ljy/" rel="me">github.com/joeyl-ljy</a></li>
+					</ul>
+				</div>
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	// load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/jekyll/2020/06/12/posts_collate-time-error" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+  
+  
+
+
+
+</body>
+</html>
+

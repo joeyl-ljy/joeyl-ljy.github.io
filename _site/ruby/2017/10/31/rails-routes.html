@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>rails数据库与路由</title>
+	<meta name="author" content="joeyl">
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+</head>
+<body>
+
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo"><a href="/">joeyl博客</a></li>
+						<!-- <li class="page"><a href="/pages.html">pages</a></li> -->
+						
+    					<li class="git"><a href="/git.html"> git</a></li>
+						
+    					<li class="ruby"><a href="/ruby.html"> ruby</a></li>
+						
+    					<li class="js"><a href="/js.html"> js</a></li>
+						
+    					<li class="react"><a href="/react.html"> react</a></li>
+						
+    					<li class="env"><a href="/env.html"> env</a></li>
+						
+    					<li class="jekyll"><a href="/jekyll.html"> jekyll</a></li>
+						
+					</ul>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">rails数据库与路由</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					<h1 id="数据库初始化">数据库初始化</h1>
+
+<p>1.运行重建数据库（5.0/4.2）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails db:create db:migrate db:seed
+rails db:drop db:create db:migrate db:seed
+bundle exec rake db:drop db:create db:migrate db:seed 
+</code></pre></div></div>
+
+<p>2.若使用gem：seed_fu</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails db:seed_fu
+</code></pre></div></div>
+
+<p>3.若使用gem：china_region_fu</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails china_region_fu:import
+</code></pre></div></div>
+
+<h1 id="路由">路由</h1>
+
+<p>路由所在目录是：config/routes.rb</p>
+
+<p>1.查看路由</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails routes
+</code></pre></div></div>
+
+<p>2.Rails 资源路由有两种，resources 和 resource</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resources :photos
+resource  :photo
+</code></pre></div></div>
+
+<p>分别生成七个路由地址和六个路由地址。</p>
+
+<h1 id="对动作进行限制">对动作进行限制</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resources :photos, :only =&gt; [:index, :show]
+resources :photos, :except =&gt; :destroy
+</code></pre></div></div>
+
+<h1 id="添加额外的动作">添加额外的动作</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.成员路由
+
+resources :photos do
+  member do
+    get 'preview'
+  end
+end
+
+resources :photos do
+  get 'preview', :on =&gt; :member
+end
+
+2.集合路由
+
+resources :photos do
+  collection do
+    get 'search'
+  end
+end
+
+resources :photos do
+  get 'search', :on =&gt; :collection
+end
+
+3.指定控制器
+
+resources :photos, :controller =&gt; "images"
+
+4.指定格式限制
+
+resources :photos, :constraints =&gt; {:id =&gt; /[A-Z][A-Z][0-9]+/}
+
+constraints(:id =&gt; /[A-Z][A-Z][0-9]+/) do
+  resources :photos
+  resources :accounts
+end
+
+5.改变 Helper
+
+resources :photos, :as =&gt; "images"
+
+6.改变匹配路径动的动作
+
+resources :photos, :path_names =&gt; { :new =&gt; 'make', :edit =&gt; 'change' }
+
+scope :path_names =&gt; { :new =&gt; "make" } do
+  resources :photos
+  resources :accounts
+end
+
+7.改变匹配的路径的资源名
+
+resources :categories, :path =&gt; "kategorien"
+resources :posts, :path =&gt; "/admin/posts"
+
+scope :path =&gt; "/admin" do
+  resources :posts, :comments
+end
+
+scope "/admin" do
+  resources :posts, :comments
+end
+
+8.控制器模块
+
+resources :posts, :module =&gt; "admin"
+
+scope :module =&gt; "admin" do
+  resources :posts, :comments
+end
+
+9.控制器命名空间
+
+namespace :admin do
+  resources :photos, :comments
+end
+
+10.嵌套路由
+
+resources :magazines do
+  resources :ads
+end
+
+11.根目录
+
+root 'pages#main'
+
+12.路径path和url
+所有路由对应的路径都有对应的 _path 形式和 _url 形式
+前者的返回值是路径，后者的返回值是路径加上由当前的主机名、端口和路径前缀组成的前缀。
+从一个域重定向到另一个域，需要完整的URL,如：
+photo_url(domain:"xxx.com",port:"8080",photo:photo)
+其他情况可直接使用：photo_path(photo)
+</code></pre></div></div>
+
+					<div class="meta">
+						<p class="date-publish">
+							Published: 
+							<date class="date-pub" title="2017-10-31T13:59:53+08:00" datetime="2017-10-31T13:59:53+08:00" pubdate>
+							<span class="month"><abbr>October</abbr></span>
+							<span class="day">31</span>
+							<span class="year">2017</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+     
+    	<li><a href="/categories.html#ruby-ref">
+    		ruby <span>26</span>
+    	</a></li>
+    
+  
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+     
+    	<li><a href="/tags.html#ruby rails-ref">ruby rails <span>21</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<!-- <div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'joeyl'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div> -->
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/ruby/2016/10/30/welcome-to-rails" title="View rails项目创建与运行">&laquo; rails项目创建与运行</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/js/2017/12/19/pie-chart" title="View 圆饼图">圆饼图 &raquo;</a></li>
+							
+						</ul>
+					</nav>
+					<p class="gotop">
+						<a href="#page">Back to Top</a>
+					</p>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>关于joeyl</h4>
+					<ul>
+						<li class="contact"><address><span class="author fn n">&copy; 2020 joeyl</span></address></li>
+						<li class="github"><a href="http://github.com/joeyl-ljy/" rel="me">github.com/joeyl-ljy</a></li>
+					</ul>
+				</div>
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	// load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/ruby/2017/10/31/rails-routes" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+  
+  
+
+
+
+</body>
+</html>
+
